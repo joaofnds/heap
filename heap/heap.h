@@ -1,8 +1,10 @@
 
 /** Descritor da heap
   */
-struct heap{
-   /* seu código aqui */
+struct heap {
+    struct heap * left;
+    struct heap * right;
+    int value;
 };
 
 /** Retorna a posição do pai

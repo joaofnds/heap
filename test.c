@@ -1,5 +1,5 @@
-#include "simpletest.h"
-#include "heap.h"
+#include "lib/simpletest.h"
+#include "heap/heap.h"
 
 #define MAX 128
 
