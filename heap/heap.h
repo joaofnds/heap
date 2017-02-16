@@ -2,9 +2,9 @@
 /** Descritor da heap
   */
 struct heap {
-    struct heap * left;
-    struct heap * right;
-    int value;
+    int * heap;
+    int size;
+    int length;
 };
 
 /** Retorna a posição do pai
