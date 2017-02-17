@@ -82,3 +82,29 @@ int heap_heapify(struct heap * p, int i);
   * @param p descritor da heap
   */
 void heap_destroy(struct heap * p);
+
+/**
+ * Troca o tamanho do bloco de memória apontado por h->heap
+ *
+ * @param h descritor de heap
+ * @param newSize nova quantidade de nodos da lista
+ * @return EXIT_SUCCESS se OK, EXIT_FAILURE se erro;
+ */
+int heap_resize(struct heap * h, int newSize);
+
+/**
+ * Calcula a altura da heap
+ *
+ * @param h descritor de heap
+ * @return altura da heap
+ */
+int heap_height(struct heap * h);
+
+/**
+ * Adiciona um nível ao heap
+ *
+ * @param h descritor de heap
+ * @param amount quantidade de níveis a adicionar
+ * @return EXIT_SUCCESS se OK, EXIT_FAILURE se erro;
+ */
+int heap_add_level(struct heap * h, int amount);
