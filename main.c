@@ -1,34 +1,74 @@
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "lib/simpletest.h"
 #include "heap/heap.h"
 
-int main() {
+#define MAX 128
 
-    struct heap * h = heap_create(3);
 
-    heap_insert(h,5);
-    heap_insert(h,6);
-    heap_insert(h,7);
+void test_create(){
+	DESCRIBE("CRIA HEAP");
+	WHEN("Eu crio uma HEAP");
 
-    printf("Heap size before: %d\n", h->size);
-    printf("Heap length before: %d\n", h->length);
 
-    printf("Tentando inserir mais do que a capacidade, resultado: %s\n", ((heap_insert(h, 8) == EXIT_SUCCESS) ? "success" : "failure") );
+	IF("Sem parâmetros");
+	THEN("Resultado deve ser ponteiro");
+	struct heap * p = heap_create(MAX);
+	isNotNull(p);
 
-    printf("Heap size after: %d\n", h->size);
-    printf("Heap length after: %d\n", h->length);
+	THEN("Deve ser vazia");
+	isEqual(heap_isempty(p),1);
 
-    printf("Heap resize back to 3 nodes: %s\n", (( heap_resize(h, 3) == EXIT_SUCCESS ) ? "success" : "failure" ));
+	heap_destroy(p);
+}
 
-    printf("Heap size after: %d\n", h->size);
-    printf("Heap length after: %d\n", h->length);
+void test_insert(){
+	int i;
+	struct heap * p = heap_create(MAX);
 
-    for (int i = 0; i < h->length; ++i) {
-        printf("heap->first(): %d\n", h->heap[i]);
-    }
+	DESCRIBE("INSERE ELEMENTOS");
+	WHEN("Eu insiro elementos");
+	IF("Insiro um número razoável MAX");
+	THEN("Deve inserir todos");
+	for(i=1; i<=MAX; i++){
+		isEqual(heap_insert(p,i), 1);
+	}
+	THEN("Deve não estar vazia");
+	isEqual(heap_isempty(p),0);
 
-    heap_destroy(h);
+	THEN("Primeiro elemento deve ser 1");
+	isEqual(heap_minimum(p),1);
 
-    return 0;
+	heap_destroy(p);
+}
+
+void test_heapify(){
+
+	int i, val;
+	struct heap * p = create(MAX);
+
+
+	DESCRIBE("HEAPIFY");
+	WHEN("Eu insiro elementos e chamo heapify");
+	int valores[]={10,9,8,7,6,5,4,3,2,1};
+
+	for(i=1; i<=10; i++){
+		heap_insert(p,i);
+		heap_heapify(p,heap_parent(i))
+	}
+	for(i=1 i<=10; i++){
+		THEN("Deve ter cabeça igual a i");
+		isEqual(heap_minimum_delete(p),i);
+	}
+
+	THEN("Deve ser vazia");
+	isEqual(heap_isempty(p),1);
+	destroy(p);
+}
+
+
+
+
+int main () {
+	test_create();
+	test_insert();
+	test_heapify();
 }

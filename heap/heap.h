@@ -58,6 +58,15 @@ int heap_minimum(struct heap *p);
  */
 int heap_minimum_delete(struct heap * p);
 
+/**
+ * Retorna o index de parâmetro val na heap
+ *
+ * @param h descritor da heap
+ * @param val value de pesquisa
+ * @return index do valor se OK, 0 se não encontrar, EXIT_FAILURE se erro
+ */
+int heap_get(struct heap * h, int val);
+
 /* Remove um elemento da heap
  * @param p descritor da heap
  * @param val o valor do elemento a ser removido
