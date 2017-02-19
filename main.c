@@ -29,7 +29,8 @@ void test_insert(){
 	IF("Insiro um número razoável MAX");
 	THEN("Deve inserir todos");
 	for(i=1; i<=MAX; i++){
-		isEqual(heap_insert(p,i), 1);
+		heap_insert(p, i);
+		isEqual(p->heap[i-1], i);
 	}
 	THEN("Deve não estar vazia");
 	isEqual(heap_isempty(p),0);
@@ -43,25 +44,25 @@ void test_insert(){
 void test_heapify(){
 
 	int i, val;
-	struct heap * p = create(MAX);
+	struct heap * p = heap_create(MAX);
 
 
 	DESCRIBE("HEAPIFY");
 	WHEN("Eu insiro elementos e chamo heapify");
-	int valores[]={10,9,8,7,6,5,4,3,2,1};
+	int valores[] = {10,9,8,7,6,5,4,3,2,1};
 
-	for(i=1; i<=10; i++){
+	for(i = 1; i <= 10; i++){
 		heap_insert(p,i);
-		heap_heapify(p,heap_parent(i))
+		heap_heapify(p,heap_parent(p, i));
 	}
-	for(i=1 i<=10; i++){
+	for(i = 1; i <= 10; i++){
 		THEN("Deve ter cabeça igual a i");
 		isEqual(heap_minimum_delete(p),i);
 	}
 
 	THEN("Deve ser vazia");
 	isEqual(heap_isempty(p),1);
-	destroy(p);
+	heap_destroy(p);
 }
 
 

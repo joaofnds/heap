@@ -67,6 +67,8 @@ int heap_minimum_delete(struct heap * p);
  */
 int heap_get(struct heap * h, int val);
 
+int heap_get_from(struct heap * h, int index);
+
 /* Remove um elemento da heap
  * @param p descritor da heap
  * @param val o valor do elemento a ser removido
@@ -117,3 +119,7 @@ int heap_height(struct heap * h);
  * @return EXIT_SUCCESS se OK, EXIT_FAILURE se erro;
  */
 int heap_add_level(struct heap * h, int amount);
+
+int swap(struct heap * h, int index_one, int index_two);
+
+int heap_child_count(struct heap * h, int index);
